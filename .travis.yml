@@ -16,6 +16,8 @@ script:
        echo >> rockrobo-voicepack${BUILD_ID}.txt;
        ./genspeech $VOICE $BUILD_ID $NAME $SPEED;
     fi;
+  - echo "testfile:Testing travis run" >> rockrobo-voicepack1.txt
+  - ./genspeech Anna 1 test 100
   - say -v ?
   - ls /System/Library/Speech/Voices/
   - cd ..

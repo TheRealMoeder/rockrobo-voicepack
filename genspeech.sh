@@ -5,11 +5,11 @@ if [ "`uname`" = "Darwin" ]
 then
 	TTSCMD="say"
         TTSCMD2="pico2wave"
-	if [ $# = 5 ]
+	if [ $# = 4 ]
 	then
-		TTSOPT="-r $5 -v $2 -o"
+		TTSOPT="-r $4 -v $1 -o"
 	else
-		TTSOPT="-v $2 -o"
+		TTSOPT="-v $1 -o"
 	fi
 	TTSFILEEXT="aiff"
 else
@@ -46,12 +46,12 @@ then
 fi
 
 echo "Generating voice files with $TTSCMD".
-SPEECHDIR="WAV"
+SPEECHDIR="wav"
 mkdir $SPEECHDIR 2>/dev/null
 rm -f ${SPEECHDIR}/* >/dev/null 2>&1
 mkdir ${SPEECHDIR}/processed
 
-for INFILE in rockrobo-voicepack$1.txt
+for INFILE in rockrobo-voicepack$2.txt
 do
 	echo "Processing roborock messages..."
 	while read LINE
@@ -61,16 +61,14 @@ do
 		LABEL=`echo $LABEL | sed -e 's/^[ \t]+//g'`
 		MSG=`echo $LABEL | sed -e 's/^ *//;s/ *$//'`
 		$TTSCMD ${TTSOPT}${SPEECHDIR}/${FILENAME}.${TTSFILEEXT} "$MSG"
-		../sox-14.4.2/sox ${SPEECHDIR}/${FILENAME}.${TTSFILEEXT} --norm=-0.1 ${SPEECHDIR}/processed/${FILENAME}.${TTSFILEEXT}
+		sox-14.4.2/sox ${SPEECHDIR}/${FILENAME}.${TTSFILEEXT} --norm=-0.1 ${SPEECHDIR}/processed/${FILENAME}.wav
 		cp ${SPEECHDIR}/processed/${FILENAME}.${TTSFILEEXT} ${SPEECHDIR}/${FILENAME}.${TTSFILEEXT}
-#		lame --quiet ${SPEECHDIR}/${IDXTEXT}.${TTSFILEEXT} ${SPEECHDIR}/${IDXTEXT}.mp3
-#		rm ${SPEECHDIR}/${IDXTEXT}.${TTSFILEEXT}
 		echo "Voicefile ${FILENAME}.wav generated"
  	done < $INFILE
 done
 
-tar -cfz ${3}-rockrobo-voicepack_${2}_${4}.pkg *.wav
-ccrypt -e -K "r0ckrobo#23456" ${3}-rockrobo-voicepack_${2}_${4}.pkg
-cp ${3}-rockrobo-voicepack_${2}_${4}.pkg.cpt ${3}-rockrobo-voicepack_${2}_${4}.pkg
+tar -cfz ${2}-rockrobo-voicepack_${1}_${3}.pkg *.wav
+ccrypt-1.11.mac-univ/ccrypt -e -K "r0ckrobo#23456" ${2}-rockrobo-voicepack_${1}_${3}.pkg
+cp ${2}-rockrobo-voicepack_${1}_${3}.pkg.cpt ${2}-rockrobo-voicepack_${1}_${3}.pkg
 echo "Voicepack created as as ${3}-rockrobo-voicepack_${2}_${4}.pkg"
 exit 0
