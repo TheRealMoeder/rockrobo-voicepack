@@ -6,13 +6,13 @@ addons:
   homebrew:
     packages:
     - ccrypt
+    update: true
 before_install: 
   - curl -L -O http://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2-macosx.zip
   - unzip sox-14.4.2-macosx.zip
   - ./get_language_pack.sh $VOICE
 
 script: 
-  - cd genspeech
   - if [ "$TRAVIS_EVENT_TYPE" == "api" ]; then
        curl https://moeder.pythonanywhere.com/voicepacker/default/deliver-rockrobo/${BUILD_ID} > rockrobo-voicepack${BUILD_ID}.txt-mac;
        tr -d '\r' < rockrobo-voicepack${BUILD_ID}.txt-mac > rockrobo-voicepack${BUILD_ID}.txt;
