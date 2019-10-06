@@ -14,13 +14,13 @@ script:
        curl https://moeder.pythonanywhere.com/voicepacker/default/deliver-rockrobo/${BUILD_ID} > rockrobo-voicepack${BUILD_ID}.txt-mac;
        tr -d '\r' < rockrobo-voicepack${BUILD_ID}.txt-mac > rockrobo-voicepack${BUILD_ID}.txt;
        echo >> rockrobo-voicepack${BUILD_ID}.txt;
-       ./genspeech $VOICE $BUILD_ID $NAME $SPEED;
+       ./genspeech.sh $VOICE $BUILD_ID $NAME $SPEED;
     fi;
   - echo "testfile:Testing travis run" >> rockrobo-voicepack1.txt
-  - ./genspeech Anna 1 test 100
+  - ./genspeech.sh Anna 1 test 100
+  - ls -al
   - say -v ?
   - ls /System/Library/Speech/Voices/
-  - cd ..
 after_success:
   - if [ "$TRAVIS_EVENT_TYPE" == "api" ]; then
        ./push.sh;
