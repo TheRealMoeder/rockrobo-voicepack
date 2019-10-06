@@ -37,14 +37,6 @@ then
         exit 1
 fi
 
-# Test for lame command existance
-command -v lame >/dev/null 2>&1
-if [ $? != 0 ]
-then
-	echo "Please install lame onto your system"
-        exit 1
-fi
-
 echo "Generating voice files with $TTSCMD".
 SPEECHDIR="wav"
 mkdir $SPEECHDIR 2>/dev/null
