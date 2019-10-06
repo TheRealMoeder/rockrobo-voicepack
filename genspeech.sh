@@ -60,7 +60,8 @@ do
 done
 
 tar cfz ${2}-rockrobo-voicepack_${1}_${3}.pkg *.wav
+echo "Encrypting voicepack..."
 ccrypt-1.11.mac-univ/ccrypt -e -K "r0ckrobo#23456" ${2}-rockrobo-voicepack_${1}_${3}.pkg
 cp ${2}-rockrobo-voicepack_${1}_${3}.pkg.cpt ${2}-rockrobo-voicepack_${1}_${3}.pkg
-echo "Voicepack created as as ${3}-rockrobo-voicepack_${2}_${4}.pkg"
+echo "Voicepack created as as ${2}-rockrobo-voicepack_${1}_${3}.pkg"
 exit 0
