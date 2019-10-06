@@ -2,12 +2,9 @@
 os: osx
 osx_image: xcode7.3
 language: bash
-addons:
-  homebrew:
-    packages:
-    - ccrypt
-    update: true
 before_install: 
+  - curl -L -O http://ccrypt.sourceforge.net/download/1.11/ccrypt-1.11.mac-univ.tar.gz
+  - tar xfz ccrypt-1.11.mac-univ.tar.gz
   - curl -L -O http://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2-macosx.zip
   - unzip sox-14.4.2-macosx.zip
   - ./get_language_pack.sh $VOICE
