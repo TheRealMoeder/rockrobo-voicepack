@@ -72,5 +72,5 @@ done
 tar -cfz ${3}-rockrobo-voicepack_${2}_${4}.pkg *.wav
 ccrypt -e -K "r0ckrobo#23456" ${3}-rockrobo-voicepack_${2}_${4}.pkg
 cp ${3}-rockrobo-voicepack_${2}_${4}.pkg.cpt ${3}-rockrobo-voicepack_${2}_${4}.pkg
-echo "Voicepack created as as ${3}-rockrobo-voicepack_${2}_${4}.pkg."
+echo "Voicepack created as as ${3}-rockrobo-voicepack_${2}_${4}.pkg"
 exit 0
