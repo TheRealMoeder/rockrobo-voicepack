@@ -54,7 +54,7 @@ do
 		MSG=`echo $LABEL | sed -e 's/^ *//;s/ *$//'`
 		$TTSCMD ${TTSOPT}${SPEECHDIR}/${FILENAME}.${TTSFILEEXT} "$MSG"
 		sox-14.4.2/sox ${SPEECHDIR}/${FILENAME}.${TTSFILEEXT} --norm=-0.1 ${SPEECHDIR}/processed/${FILENAME}.wav
-		cp ${SPEECHDIR}/processed/${FILENAME}.${TTSFILEEXT} ${SPEECHDIR}/${FILENAME}.${TTSFILEEXT}
+		cp ${SPEECHDIR}/processed/${FILENAME}.wav .
 		echo "Voicefile ${FILENAME}.wav generated"
  	done < $INFILE
 done
