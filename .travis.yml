@@ -1,0 +1,28 @@
+
+os: osx
+osx_image: xcode7.3
+language: bash
+addons:
+  homebrew:
+    packages:
+    - ccrypt
+before_install: 
+  - curl -L -O http://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2-macosx.zip
+  - unzip sox-14.4.2-macosx.zip
+  - ./get_language_pack.sh $VOICE
+
+script: 
+  - cd genspeech
+  - if [ "$TRAVIS_EVENT_TYPE" == "api" ]; then
+       curl https://moeder.pythonanywhere.com/voicepacker/default/deliver-rockrobo/${BUILD_ID} > rockrobo-voicepack${BUILD_ID}.txt-mac;
+       tr -d '\r' < rockrobo-voicepack${BUILD_ID}.txt-mac > rockrobo-voicepack${BUILD_ID}.txt;
+       echo >> rockrobo-voicepack${BUILD_ID}.txt;
+       ./genspeech $VOICE $BUILD_ID $NAME $SPEED;
+    fi;
+  - say -v ?
+  - ls /System/Library/Speech/Voices/
+  - cd ..
+after_success:
+  - if [ "$TRAVIS_EVENT_TYPE" == "api" ]; then
+       ./push.sh;
+    fi;
