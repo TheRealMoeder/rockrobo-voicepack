@@ -11,7 +11,7 @@ before_install:
 
 script: 
   - if [ "$TRAVIS_EVENT_TYPE" == "api" ]; then
-       curl https://moeder.pythonanywhere.com/voicepacker/default/deliver-rockrobo/${BUILD_ID} > rockrobo-voicepack${BUILD_ID}.txt-mac;
+       curl https://moeder.pythonanywhere.com/rockrobo/default/deliver/${BUILD_ID} > rockrobo-voicepack${BUILD_ID}.txt-mac;
        tr -d '\r' < rockrobo-voicepack${BUILD_ID}.txt-mac > rockrobo-voicepack${BUILD_ID}.txt;
        echo >> rockrobo-voicepack${BUILD_ID}.txt;
        ./genspeech.sh $VOICE $BUILD_ID $NAME $SPEED;
