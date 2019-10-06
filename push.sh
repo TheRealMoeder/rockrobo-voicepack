@@ -12,6 +12,7 @@ commit_website_files() {
   cp ../rockrobo-voicepack/*.pkg .
   ../rockrobo-voicepack/create_index.sh
   git add index.md
+  git add rockrobo.md
   git add *.zip
   git add *.pkg
   git commit -m "Created build ID $BUILD_ID from rockrobo voicepacker"
